@@ -25,6 +25,8 @@ database.connect();
 app.use(express.json());
 app.use(cookieParser());
 
+
+
 const allowedOrigins = [
   "https://study-notion-git-main-arjuns-projects-c804732d.vercel.app",
   "http://localhost:3000", // for local dev (optional)
@@ -33,6 +35,12 @@ const allowedOrigins = [
   "study-notion-git-main-arjuns-projects-c804732d.vercel.app",
   "study-notion-95z9bcuc2-arjuns-projects-c804732d.vercel.app",
 ];
+
+app.use((req, res, next) => {
+  console.log("Incoming request origin:", req.headers.origin);
+  next();
+});
+  
 
 app.use(
   cors({
