@@ -26,16 +26,17 @@ app.use(express.json());
 app.use(cookieParser());
 
 const allowedOrigins = [
-  "https://study-notion-blue-mu.vercel.app",
   "https://study-notion-git-main-arjuns-projects-c804732d.vercel.app",
+  "http://localhost:3000", // for local dev (optional)
 ];
 
 app.use(
   cors({
     origin: function (origin, callback) {
-      if (allowedOrigins.includes(origin)) {
+      if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
+        console.log("Blocked by CORS: ", origin);
         callback(new Error("Not allowed by CORS"));
       }
     },
