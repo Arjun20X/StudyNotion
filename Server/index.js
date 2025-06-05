@@ -24,12 +24,25 @@ database.connect();
 // middlewares
 app.use(express.json());
 app.use(cookieParser());
+
+const allowedOrigins = [
+  "https://study-notion-blue-mu.vercel.app",
+  "https://study-notion-git-main-arjuns-projects-c804732d.vercel.app",
+];
+
 app.use(
   cors({
-    origin: "https://study-notion-blue-mu.vercel.app",
+    origin: function (origin, callback) {
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );
+  
 
 app.use(
     fileUpload({
