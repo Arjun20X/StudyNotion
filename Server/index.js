@@ -28,6 +28,10 @@ app.use(cookieParser());
 const allowedOrigins = [
   "https://study-notion-git-main-arjuns-projects-c804732d.vercel.app",
   "http://localhost:3000", // for local dev (optional)
+  "study-notion-blue-mu.vercel.app",
+  "study-notion-arjuns-projects-c804732d.vercel.app",
+  "study-notion-git-main-arjuns-projects-c804732d.vercel.app",
+  "study-notion-95z9bcuc2-arjuns-projects-c804732d.vercel.app",
 ];
 
 app.use(
