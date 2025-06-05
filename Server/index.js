@@ -29,18 +29,16 @@ app.use(cookieParser());
 
 const allowedOrigins = [
   "https://study-notion-git-main-arjuns-projects-c804732d.vercel.app",
-  "http://localhost:3000", // for local dev (optional)
-  "study-notion-blue-mu.vercel.app",
-  "study-notion-arjuns-projects-c804732d.vercel.app",
-  "study-notion-git-main-arjuns-projects-c804732d.vercel.app",
-  "study-notion-95z9bcuc2-arjuns-projects-c804732d.vercel.app",
+  "http://localhost:3000", // for local dev
+  "https://study-notion-blue-mu.vercel.app",
+  "https://study-notion-arjuns-projects-c804732d.vercel.app",
+  "https://study-notion-95z9bcuc2-arjuns-projects-c804732d.vercel.app",
 ];
 
 app.use((req, res, next) => {
   console.log("Incoming request origin:", req.headers.origin);
   next();
 });
-  
 
 app.use(
   cors({
@@ -48,13 +46,14 @@ app.use(
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
-        console.log("Blocked by CORS: ", origin);
+        console.log("❌ Blocked by CORS:", origin);
         callback(new Error("Not allowed by CORS"));
       }
     },
     credentials: true,
   })
 );
+  
   
 
 app.use(
