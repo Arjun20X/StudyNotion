@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom';
 import RenderSteps from '../AddCourse/RenderSteps';
 import { setCourse, setEditCourse } from '../../../../slice/courseSlice';
-import {fetchCourseDetails, getFullDetailsOfCourse } from '../../../../Services/operations/courseDetailsAPI';
+import { getFullDetailsOfCourse } from '../../../../Services/operations/courseDetailsAPI';
 
 export default function EditCourse(){
 
@@ -24,6 +24,7 @@ export default function EditCourse(){
             setLoading(false);
         }
         populateCourseDetails();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
     if(loading) {

@@ -22,7 +22,6 @@ const NavBar = ({ setProgress }) => {
     const { user } = useSelector(state => state.profile);
     const { totalItems } = useSelector(state => state.cart);
     const [prevScrollPos, setPrevScrollPos] = useState(0);
-    const [visible, setVisible] = useState(true)
     const [searchValue, setSearchValue] = useState("")
     const navigate = useNavigate();
 
@@ -64,23 +63,21 @@ const NavBar = ({ setProgress }) => {
 
 
     //handeling navbar scroll
-    const handleScroll = () => {
-        const currentScrollPos = window.scrollY
+    //handeling navbar scroll
+    // const handleScroll = () => {
+    //     const currentScrollPos = window.scrollY
+    //     if (currentScrollPos > prevScrollPos) {
+    //         // setVisible(false)
+    //     } else {
+    //         // setVisible(true)
+    //     }
+    //     setPrevScrollPos(currentScrollPos)
+    // }
 
-        if (currentScrollPos > prevScrollPos) {
-            setVisible(false)
-        } else {
-            setVisible(true)
-        }
-
-        setPrevScrollPos(currentScrollPos)
-    }
-
-    useEffect(() => {
-        window.addEventListener('scroll', handleScroll);
-
-        return () => window.removeEventListener('scroll', handleScroll)
-    })
+    // useEffect(() => {
+    //     window.addEventListener('scroll', handleScroll);
+    //     return () => window.removeEventListener('scroll', handleScroll)
+    // }, [prevScrollPos, handleScroll])
 
     const handelSearch = (e) => {
         e.preventDefault();

@@ -16,6 +16,7 @@ const RenderCartCourses = () => {
     <div className="flex flex-1 flex-col">
       {
         cart.map((course,index) => {
+            return (
             <div key={course._id}
             className={`flex w-full flex-wrap items-start justify-between gap-6 ${
               index !== cart.length - 1 && "border-b border-b-richblack-400 pb-6"
@@ -59,6 +60,7 @@ const RenderCartCourses = () => {
                 </div>
 
             </div>
+            )
         })
       }
     </div>

@@ -21,6 +21,7 @@ const PublishCourse = () => {
         if(course?.status === COURSE_STATUS.PUBLISHED){
             setValue("public", true);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
 
     const goBack = () => {
@@ -34,7 +35,7 @@ const PublishCourse = () => {
 
     const handleCoursePublish = async () => {
         // check if form has been updated or not
-        if(course?.status === COURSE_STATUS.PUBLISHED && getValues("public") === true ||
+        if((course?.status === COURSE_STATUS.PUBLISHED && getValues("public") === true) ||
         (course?.status === COURSE_STATUS.DRAFT && getValues("public") === false ) ){
             // no updation in form
             // no need to make API Call

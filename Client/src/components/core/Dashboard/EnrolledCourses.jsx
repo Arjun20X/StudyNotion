@@ -24,6 +24,7 @@ const EnrolledCourses = () => {
 
     useEffect(() => {
         getEnrolledCourses();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
 
   return (
@@ -44,7 +45,8 @@ const EnrolledCourses = () => {
                 {/* Cards yha se shuru hote h ab */}
                 {
                     enrolledCourses.map((course,index) => {
-                        <div className='flex items-center border border-richblack-700 '>
+                        return (
+                        <div key={index} className='flex items-center border border-richblack-700 '>
                             <div 
                             onClick={() => {
                                 navigate(
@@ -86,6 +88,7 @@ const EnrolledCourses = () => {
                             </div>
 
                         </div>
+                        )
                     })
                 }
             </div>

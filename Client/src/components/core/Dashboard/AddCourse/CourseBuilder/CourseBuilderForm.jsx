@@ -22,6 +22,7 @@ const CourseBuilderForm = () => {
 
   useEffect(() => {
     console.log("EditSectionFlag...", editSectionName);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[course]);
 
   const onSubmit = async (data) => {

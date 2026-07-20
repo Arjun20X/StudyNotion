@@ -27,7 +27,6 @@ const ReviewSlider = () => {
           setReviews(data?.data);
         }
 
-        console.log("PRINTING REVIEWS...", reviews);
       } catch (error) {
         console.error("Error fetching reviews ", error);
       }

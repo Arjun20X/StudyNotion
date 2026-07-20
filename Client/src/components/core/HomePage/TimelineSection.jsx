@@ -68,7 +68,7 @@ const TimelineSection = () => {
 
         <div className="relative w-fit h-fit shadow-blue-200 shadow-[0px_0px_30px_0px]" >
 
-            <img src={timelineImage} alt='timeline image' className="shadow-white shadow-[20px_20px_0px_0px] object-cover h-[400px] lg:h-fit" />
+            <img src={timelineImage} alt='timeline' className="shadow-white shadow-[20px_20px_0px_0px] object-cover h-[400px] lg:h-fit" />
         
 
             <div className="absolute lg:left-[50%] lg:bottom-0 lg:translate-x-[-50%] lg:translate-y-[50%] bg-caribbeangreen-700 flex lg:flex-row flex-col text-white uppercase py-5 gap-4 lg:gap-0 lg:py-10 ">

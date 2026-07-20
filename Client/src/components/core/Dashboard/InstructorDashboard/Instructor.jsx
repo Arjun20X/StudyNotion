@@ -32,6 +32,7 @@ const Instructor = () => {
             setLoading(false);
         }
         getCourseDataWithStats();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
     const totalAmount = instructorData?.reduce((acc,curr) => acc+ curr.totalAmountGenerated, 0);
@@ -84,9 +85,10 @@ const Instructor = () => {
           <div>
             {
               courses.slice(0,3).map((course) => (
-                <div>
+                <div key={course._id}>
                   <img 
                     src={course.thumbnail}
+                    alt={course.courseName}
                   />
                   <div>
                     <p>{course.courseName}</p>

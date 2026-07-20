@@ -7,8 +7,6 @@ import { markLectureAsComplete} from "../../../Services/operations/courseDetails
 import Iconbtn from "../../Common/Iconbtn";
 import "video-react/dist/video-react.css"
 import { BigPlayButton, ControlBar, CurrentTimeDisplay, ForwardControl, LoadingSpinner, PlaybackRateMenuButton, Player, ReplayControl, TimeDivider } from "video-react"
-import { BiSkipNextCircle, BiSkipPreviousCircle } from "react-icons/bi"
-import { MdOutlineReplayCircleFilled } from "react-icons/md"
 
 
 const VideoDetails = () => {
@@ -24,7 +22,7 @@ const VideoDetails = () => {
   const [videoData, setVideoData] = useState([]);
   const [videoEnded, setVideoEnded] = useState(false);
   const [loading , setLoading] = useState(false);
-  const [previewSource, setPreviewSource] = useState("")
+  // const [previewSource, setPreviewSource] = useState("")
 
 
   useEffect (() => {
@@ -48,14 +46,14 @@ const VideoDetails = () => {
         )
 
         setVideoData(filteredVideoData[0]);
-        setPreviewSource(courseEntireData.thumbnail)
+        // setPreviewSource(courseEntireData.thumbnail)
         setVideoEnded(false);
 
       }
     }
 
     setVideoSpecificDetails();
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[courseSectionData, courseEntireData, location.pathname])
 
 
@@ -134,7 +132,7 @@ const VideoDetails = () => {
       (data) => data._id === subSectionId
     )
 
-    if(currentSubSectionIndex != 0){
+    if(currentSubSectionIndex !== 0){
       // same section , previous video
       const prevSubSectionId = courseSectionData[currentSectionIndex].subSection[currentSubSectionIndex - 1]._id;
       // is video pr jao

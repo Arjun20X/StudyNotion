@@ -22,6 +22,7 @@ const CourseReviewModal = ({setReviewModal}) => {
     useEffect(() => {
         setValue("courseExperience", "");
         setValue("courseRating", 0);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
     const ratingChanged = (newRating) => {
@@ -58,7 +59,7 @@ const CourseReviewModal = ({setReviewModal}) => {
             <div className="flex items-center justify-center gap-x-4">
                 <img
                     src={user?.image}
-                    alt='User Image'
+                    alt='User Profile'
                     className='aspect-square w-[50px] rounded-full object-cover '
                 />
                 <div className=''>

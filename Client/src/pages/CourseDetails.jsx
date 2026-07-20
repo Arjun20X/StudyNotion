@@ -41,6 +41,7 @@ const CourseDetails = () => {
         getCourseFullDetails();
         console.log("PRINTING COURSEDATA.....", courseData);
 
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[courseId]);
 
     const [avgReviewCount, setAvgReviewCount] = useState(0);
@@ -48,6 +49,7 @@ const CourseDetails = () => {
     useEffect(() => {
         const count = GetAvgRating(courseData?.data?.courseDetails?.ratingAndReviews);
         setAvgReviewCount(count);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[courseData]);
 
     const [totalNoOfLectures, setTotalNoOfLectures] = useState(0);
@@ -61,6 +63,7 @@ const CourseDetails = () => {
 
         setTotalNoOfLectures(lectures);
 
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[courseData])
 
 
@@ -69,7 +72,7 @@ const CourseDetails = () => {
         setIsActive(
             !isActive.includes(id)
             ? isActive.concat([id])
-            : isActive.filter((e) => e != id)
+            : isActive.filter((e) => e !== id)
         )
     }
 
@@ -110,7 +113,7 @@ const CourseDetails = () => {
     }
 
     const {
-        _id: course_id,
+        // _id: course_id,
         courseName,
         courseDescription,
         thumbnail,

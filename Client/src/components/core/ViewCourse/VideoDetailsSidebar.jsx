@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Iconbtn from '../../Common/Iconbtn';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md'
-import { FaAngleDoubleRight } from 'react-icons/fa'
 
 const VideoDetailsSidebar = ({setReviewModal}) => {
 
@@ -13,7 +11,7 @@ const VideoDetailsSidebar = ({setReviewModal}) => {
     const [videobarActive, setVideoBarActive] = useState("");
     const navigate = useNavigate();
     const location = useLocation();
-    const {sectionId, subSectionId, courseId} = useParams();
+    const {sectionId, subSectionId} = useParams();
     const{
         courseSectionData,
         courseEntireData,
@@ -29,13 +27,11 @@ const VideoDetailsSidebar = ({setReviewModal}) => {
             const currentSectionIndex = courseSectionData.findIndex(
                 (data) => data._id === sectionId
             );
-            const currentSubSectionIndex = courseSectionData?.[currentSectionIndex]?.subSection.
-            findIndex(
+            const currentSubSectionIndex = courseSectionData?.[currentSectionIndex]?.subSection.findIndex(
                 (data) => data._id === subSectionId            
             )
 
-            const activeSubSectionId = courseSectionData[currentSectionIndex]?.subSection?.
-            [currentSubSectionIndex]?._id;
+            const activeSubSectionId = courseSectionData[currentSectionIndex]?.subSection?.[currentSubSectionIndex]?._id;
             
             // set current section here
             setActiveStatus(courseSectionData?.[currentSectionIndex]?._id);
@@ -44,6 +40,7 @@ const VideoDetailsSidebar = ({setReviewModal}) => {
             setVideoBarActive(activeSubSectionId);
         }
         setActiveFlag();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[courseSectionData, courseEntireData, location.pathname])
 
     const handleAddReview = () => {
@@ -84,6 +81,7 @@ const VideoDetailsSidebar = ({setReviewModal}) => {
             <div className='h-[calc(100vh - 5rem)] overflow-y-auto px-2'>
                 {
                     courseSectionData.map((section, index) => {
+                        return (
                         <div
                         onClick={() => setActiveStatus(section?._id)}
                         key={index}
@@ -105,6 +103,7 @@ const VideoDetailsSidebar = ({setReviewModal}) => {
                                         <div>
                                             {
                                                 section.subSection.map((topic, index) => {
+                                                    return (
                                                     <div
                                                     className={`flex gap-5 p-5 ${
                                                         videobarActive === topic._id 
@@ -128,6 +127,7 @@ const VideoDetailsSidebar = ({setReviewModal}) => {
                                                             {topic.title}
                                                         </span>
                                                     </div>
+                                                    )
                                                 })
                                             }
                                         </div>
@@ -136,6 +136,7 @@ const VideoDetailsSidebar = ({setReviewModal}) => {
                             </div>
 
                         </div>
+                        )
                     })
                 }
             </div>

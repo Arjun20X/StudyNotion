@@ -10,7 +10,7 @@ import ConfirmationModal from '../../Common/ConfirmationModal'
 
 const Sidebar = () => {
 
-    const {token} = useSelector((state) => state.auth);
+    // const {token} = useSelector((state) => state.auth);
     const {user, loading: profileLoading} = useSelector((state) => state.profile);
     const {loading: authLoading} = useSelector((state) => state.auth);
     const dispatch = useDispatch();
