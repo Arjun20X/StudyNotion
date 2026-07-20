@@ -1,30 +1,34 @@
-const nodemailer = require("nodemailer");
-require("dotenv").config();
-
-const mailSender = async (email,title,body) => {
-    try{
-        let transporter =  nodemailer.createTransport({
-            host:process.env.MAIL_HOST,
-            port: 465,
-            secure: true,
-            auth:{
-                user:process.env.MAIL_USER,
-                pass:process.env.MAIL_PASS,
-            }
+const mailSender = async (email, title, body) => {
+    try {
+        const response = await fetch('https://api.brevo.com/v3/smtp/email', {
+            method: 'POST',
+            headers: {
+                'accept': 'application/json',
+                'api-key': process.env.BREVO_API_KEY,
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                sender: { 
+                    email: process.env.MAIL_USER, 
+                    name: 'StudyNotion' 
+                },
+                to: [{ email: email }],
+                subject: title,
+                htmlContent: body
+            })
         });
 
-        let info = await transporter.sendMail({
-            from: `"StudyNotion" <${process.env.MAIL_USER}>`,
-            to:`${email}`,
-            subject:`${title}`,
-            html:`${body}`,
-        });
+        const data = await response.json();
+        
+        if (!response.ok) {
+            console.error("Brevo API Error:", data);
+            return data;
+        }
 
-        console.log(info);
-        return info;
-    }
-    catch(error){
-        console.log(error.message);
+        console.log("Email sent successfully via Brevo:", data);
+        return data;
+    } catch (error) {
+        console.error("Failed to send email:", error.message);
         return error.message;
     }
 };
