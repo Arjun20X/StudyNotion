@@ -37,22 +37,13 @@ const allowedOrigins = [
 ];
   
 
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      // Allow requests with no origin (like mobile apps or curl)
-      if (!origin) return callback(null, true);
+const corsOptions = {
+  origin: 'https://study-notion-six-amber.vercel.app/',
+  allowedHeaders: 'Content-Type,Authorization'
+};
 
-      // Allow all *.vercel.app subdomains
-      if (allowedOrigins.includes(origin) || origin.endsWith(".vercel.app")) {
-        callback(null, true);
-      } else {
-        console.log("Blocked by CORS:", origin);
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true,
-  })
+app.use(
+  cors(corsOptions)
 );
   
 
