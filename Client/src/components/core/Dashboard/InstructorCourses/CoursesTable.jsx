@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { convertSecondsToDuration } from "../../../../utils/secToDuration"
 import { COURSE_STATUS } from '../../../../utils/constants';
 import ConfirmationModal from '../../../Common/ConfirmationModal';

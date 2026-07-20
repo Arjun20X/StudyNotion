@@ -7,7 +7,6 @@ import { MdOutlineKeyboardArrowDown } from 'react-icons/md'
 const VideoDetailsSidebar = ({setReviewModal}) => {
 
     const [activeStatus, setActiveStatus] = useState("");
-    const [showSidebar, setShowSidebar] = useState(false);
     const [videobarActive, setVideoBarActive] = useState("");
     const navigate = useNavigate();
     const location = useLocation();

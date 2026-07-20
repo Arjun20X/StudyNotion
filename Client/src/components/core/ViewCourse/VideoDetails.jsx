@@ -6,8 +6,7 @@ import { CiPlay1 } from "react-icons/ci";
 import { markLectureAsComplete} from "../../../Services/operations/courseDetailsAPI"
 import Iconbtn from "../../Common/Iconbtn";
 import "video-react/dist/video-react.css"
-import { BigPlayButton, ControlBar, CurrentTimeDisplay, ForwardControl, LoadingSpinner, PlaybackRateMenuButton, Player, ReplayControl, TimeDivider } from "video-react"
-
+import { ControlBar, CurrentTimeDisplay, ForwardControl, LoadingSpinner, PlaybackRateMenuButton, Player, ReplayControl, TimeDivider } from "video-react"
 
 const VideoDetails = () => {
 
@@ -196,14 +195,14 @@ const VideoDetails = () => {
             {
               videoEnded && (
                 <div className='flex justify-center items-center'>
-                  !completedLectures.includes(subSectionId) && (
+                  { !completedLectures.includes(subSectionId) && (
                     <Iconbtn 
                       disabled={loading}
                       onClick={() => handleLectureCompletion()}
                       text={!loading ? "Mark As Completed" : "Loading..."}
                       className='bg-yellow-100 text-richblack-900 absolute top-[20%] hover:scale-90 z-20 font-medium md:text-sm px-4 py-2 rounded-md'
                     />
-                  )
+                  )}
 
                   <Iconbtn 
                     disabled={loading}

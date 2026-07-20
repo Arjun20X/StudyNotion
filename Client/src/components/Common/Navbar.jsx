@@ -21,7 +21,6 @@ const NavBar = ({ setProgress }) => {
     const { token } = useSelector(state => state.auth);
     const { user } = useSelector(state => state.profile);
     const { totalItems } = useSelector(state => state.cart);
-    const [prevScrollPos, setPrevScrollPos] = useState(0);
     const [searchValue, setSearchValue] = useState("")
     const navigate = useNavigate();
 
