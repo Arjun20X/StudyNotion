@@ -16,7 +16,7 @@ import { formatDate } from "../../../../Services/formatDate"
 
 
 export default function CoursesTable({courses, setCourses}){
-
+    const navigate = useNavigate();
     const {token} = useSelector((state) => state.auth);
     const [loading, setLoading] = useState(false);
     const [confirmationModal, setConfirmationModal] = useState(null);
