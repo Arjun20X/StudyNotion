@@ -43,7 +43,7 @@ const corsOptions = {
 };
 
 app.use(
-  cors(corsOptions)
+  cors()
 );
   
 
