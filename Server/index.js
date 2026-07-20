@@ -37,10 +37,10 @@ const allowedOrigins = [
 ];
   
 
-const corsOptions = {
-  origin: 'https://study-notion-six-amber.vercel.app/',
-  allowedHeaders: 'Content-Type,Authorization'
-};
+// const corsOptions = {
+//   origin: 'https://study-notion-six-amber.vercel.app/',
+//   allowedHeaders: 'Content-Type,Authorization'
+// };
 
 app.use(
   cors()
