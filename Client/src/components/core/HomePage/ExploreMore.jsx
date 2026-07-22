@@ -36,6 +36,26 @@ const ExploreMore = () => {
       Learn to Build Anything You Can Imagine
       </p>
 
+      {/* Mobile tabs - horizontal scroll */}
+      <div className="flex lg:hidden overflow-x-auto gap-2 -mt-5 mx-auto w-full pb-2 scrollbar-hide">
+        {
+          tabsName.map((element, index) => (
+            <div
+              className={`text-[14px] whitespace-nowrap flex-shrink-0 flex flex-row items-center gap-2 ${
+                currentTab === element
+                  ? "bg-richblack-900 text-richblack-5 font-medium"
+                  : "text-richblack-200"
+              } rounded-full transition-all duration-200 cursor-pointer bg-richblack-800 px-5 py-2`}
+              key={index}
+              onClick={() => setMyCards(element)}
+            >
+              {element}
+            </div>
+          ))
+        }
+      </div>
+
+      {/* Desktop tabs */}
       <div className="hidden lg:flex gap-5 -mt-5 mx-auto w-max bg-richblack-800 text-richblack-200 p-1 rounded-full font-medium drop-shadow-[0_1.5px_rgba(255,255,255,0.25)]" >
         {
           tabsName.map((element, index) => {
@@ -57,7 +77,7 @@ const ExploreMore = () => {
       <div className="hidden lg:block lg:h-[200px]" ></div>
 
       {/* Course Card Div */}
-      <div className="lg:absolute gap-10 justify-center lg:gap-0 flex lg:justify-between flex-wrap w-full lg:bottom-[0] lg:left-[50%] lg:translate-x-[-50%] lg:translate-y-[50%] text-black lg:mb-0 mb-7 lg:px-0 px-3" >
+      <div className="lg:absolute gap-6 lg:gap-0 justify-center flex lg:justify-between flex-wrap w-full lg:bottom-[0] lg:left-[50%] lg:translate-x-[-50%] lg:translate-y-[50%] text-black mb-7 lg:mb-0 px-3 lg:px-0 mt-6 lg:mt-0" >
         {
           courses.map( (element,index) => {
             return (

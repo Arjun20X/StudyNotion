@@ -16,42 +16,74 @@ const Catalog = () => {
     const [active, setActive] = useState(1)
     const [catalogPageData, setCatalogPageData] = useState(null);
     const [categoryId, setCategoryId] = useState(null);
+    const [isPageLoading, setIsPageLoading] = useState(true);
+    const [categoryNotFound, setCategoryNotFound] = useState(false);
 
-    // Fetch all categories
+    // Fetch all categories and find matching one
     useEffect(() => {
         const getCategories = async () => {
-            const res = await apiconnector("GET",categories.CATEGORIES_API );
-            const category_id = res?.data?.data?.filter((ct) => ct.name.split(" ").join("-").toLowerCase() === catalogName)[0]?._id;
-            setCategoryId(category_id);
+            try {
+                const res = await apiconnector("GET", categories.CATEGORIES_API);
+                const matched = res?.data?.data?.filter(
+                    (ct) => ct.name.split(" ").join("-").toLowerCase() === catalogName
+                )[0];
+                if (matched) {
+                    setCategoryId(matched._id);
+                } else {
+                    setCategoryNotFound(true);
+                    setIsPageLoading(false);
+                }
+            } catch (err) {
+                console.log(err);
+                setCategoryNotFound(true);
+                setIsPageLoading(false);
+            }
         }
+        setIsPageLoading(true);
+        setCategoryNotFound(false);
+        setCatalogPageData(null);
+        setCategoryId(null);
         getCategories();
-    },[catalogName])
+    }, [catalogName])
 
     useEffect(() => {
         const getCategoryDetails = async () => {
-            try{
+            try {
                 const res = await getCatalogPageData(categoryId);
-                setCatalogPageData(res);
-            }
-            catch(error){
-                console.log(error)
+                setCatalogPageData(res || null);
+            } catch(error) {
+                console.log(error);
+            } finally {
+                setIsPageLoading(false);
             }
         }
-        if(categoryId){
+        if (categoryId) {
             getCategoryDetails();
         }
-    },[categoryId]);
+    }, [categoryId]);
 
-    if (loading || !catalogPageData) {
+    if (loading || isPageLoading) {
         return (
           <div className="grid min-h-[calc(100vh-3.5rem)] place-items-center">
             <div className="spinner"></div>
           </div>
         )
-      }
-      if (!loading && !catalogPageData.success) {
+    }
+
+    if (categoryNotFound || !catalogPageData) {
+        return (
+            <div className="grid min-h-[calc(100vh-3.5rem)] place-items-center text-richblack-5">
+                <div className="text-center">
+                    <p className="text-3xl font-semibold mb-3">No Courses Found</p>
+                    <p className="text-richblack-300">There are no courses in this category yet.</p>
+                </div>
+            </div>
+        )
+    }
+
+    if (!catalogPageData.success) {
         return <Error />
-      }
+    }
 
   return (
     <div className=" box-content bg-richblack-800 px-4">
@@ -107,7 +139,6 @@ const Catalog = () => {
             <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
                 <div className="section_heading">Frequently Bought</div>
                 <div className='py-8' >
-
                     <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
                         {
                             catalogPageData?.data?.mostSellingCourses?.slice(0,4)
@@ -116,7 +147,6 @@ const Catalog = () => {
                             ))
                         }
                     </div>
-
                 </div>
             </div>
 

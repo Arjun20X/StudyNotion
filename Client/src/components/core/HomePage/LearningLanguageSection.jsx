@@ -7,7 +7,7 @@ import CTAButton from "../HomePage/Button"
 
 const LearningLanguageSection = () => {
   return (
-    <div className='mt-[130px] mb-32 ' >
+    <div className='mt-16 lg:mt-[130px] mb-20 lg:mb-32 ' >
       <div className='flex flex-col gap-5 items-center ' >
 
         <div className='text-4xl font-semibold text-center ' >
@@ -20,9 +20,9 @@ const LearningLanguageSection = () => {
         </div>
 
         <div className="flex flex-col lg:flex-row items-center justify-center mt-8 lg:mt-0" >
-            <img src={know_your_progress} alt='' className='object-contain lg:-mr-32' />
-            <img src={compare_with_others} alt='' className='object-contain lg:-mb-10 lg:-mt-0 -mt-12' />
-            <img src={plan_your_lesson} alt='' className='object-contain lg:-ml-36 lg:-mt-5 -mt-16' />
+            <img src={know_your_progress} alt='' className='object-contain lg:-mr-32 w-full max-w-[400px] lg:max-w-none' />
+            <img src={compare_with_others} alt='' className='object-contain lg:-mb-10 lg:-mt-0 w-full max-w-[400px] lg:max-w-none' />
+            <img src={plan_your_lesson} alt='' className='object-contain lg:-ml-36 lg:-mt-5 w-full max-w-[400px] lg:max-w-none' />
         </div>
 
         <div className='w-fit mx-auto lg:mb-20 mb-8 -mt-5' >

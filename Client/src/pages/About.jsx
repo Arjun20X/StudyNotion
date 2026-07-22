@@ -18,7 +18,7 @@ const About = () => {
         {/* Section-1 */}
         <section className="bg-richblack-700">
             <div className="relative mx-auto flex w-11/12 max-w-maxContent flex-col justify-between gap-10 text-center text-white">
-                <header className="mx-auto py-20 text-4xl font-semibold lg:w-[70%]">
+                <header className="mx-auto py-10 lg:py-20 text-2xl md:text-4xl font-semibold lg:w-[70%]">
                     Driving Innovation in Online Education for a 
                     <HighlightText text={"Brighter Future"} />
                     <p className="mx-auto mt-3 text-center text-base font-medium text-richblack-300 lg:w-[95%]">
@@ -28,10 +28,18 @@ const About = () => {
 
                 <div className="sm:h-[70px] lg:h-[150px]"></div>
 
-                <div className="absolute bottom-0 left-[50%] grid w-[100%] translate-x-[-50%] translate-y-[30%] grid-cols-3 gap-3 lg:gap-5" >
+                {/* Banner images: absolute on lg, hidden on mobile to avoid overflow */}
+                <div className="hidden lg:absolute bottom-0 left-[50%] lg:grid w-[100%] translate-x-[-50%] translate-y-[30%] grid-cols-3 gap-3 lg:gap-5" >
                     <img src={BannerImage1} alt='' />
                     <img src={BannerImage2} alt='' />
                     <img src={BannerImage3} alt='' />
+                </div>
+
+                {/* Mobile banner: normal flow */}
+                <div className="grid grid-cols-3 gap-2 lg:hidden w-full mb-8">
+                    <img src={BannerImage1} alt='' className='rounded-lg object-cover w-full' />
+                    <img src={BannerImage2} alt='' className='rounded-lg object-cover w-full' />
+                    <img src={BannerImage3} alt='' className='rounded-lg object-cover w-full' />
                 </div>
             </div>
         </section>

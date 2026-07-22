@@ -6,9 +6,9 @@ import { TypeAnimation } from 'react-type-animation'
 
 const CodeBlocks = ({position,heading,subheading,ctabtn1,ctabtn2,codeblock,backgroundGradient, codeColor}) => {
   return (
-    <div className={`flex ${position} my-20 justify-between flex-col lg:gap-10 gap-10`} >
+    <div className={`flex ${position} my-10 lg:my-20 justify-between flex-col lg:gap-10 gap-8`} >
       {/*Section 1 */}
-      <div className='w-[100%] lg:w-[50%] flex flex-col gap-8 ' >
+      <div className='w-full lg:w-[50%] flex flex-col gap-6 lg:gap-8 ' >
         {heading}
         {/* Sub Heading */}
         <div className='text-richblack-300 text-base font-bold w-[85%] -mt-3 ' >
@@ -35,7 +35,7 @@ const CodeBlocks = ({position,heading,subheading,ctabtn1,ctabtn2,codeblock,backg
 
 
     {/* Section-2 */}
-    <div className='h-fit flex flex-row w-[100%] text-[15px]  py-2 lg:w-[500px] bg-opacity-50 backdrop-blur-sm bg-richblack-800 border-[2px] border-pure-greys-500 border-opacity-50' >
+    <div className='h-fit flex flex-row w-full text-[12px] lg:text-[15px] py-2 lg:w-[500px] bg-opacity-50 backdrop-blur-sm bg-richblack-800 border-[2px] border-pure-greys-500 border-opacity-50 overflow-x-auto' >
       {/* HW: Bg-Gradient */}
 
       <div className='text-center flex flex-col w-[10%] text-richblack-400 font-inter font-bold ' >

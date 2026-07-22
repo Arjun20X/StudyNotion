@@ -1,3 +1,7 @@
+// Force Google DNS to ensure mongodb+srv:// SRV records resolve correctly
+const dns = require("dns");
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
+
 const express = require("express");
 const app = express();
 
