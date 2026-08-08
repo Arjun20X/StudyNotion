@@ -166,7 +166,7 @@ const enrollStudents = async(courses, userId, res) => {
       }
 
       const courseProgress = await CourseProgress.create({
-        courseId:courseID,
+        courseID:courseID,
         userId:userId,
         completedVideos:[],
       })

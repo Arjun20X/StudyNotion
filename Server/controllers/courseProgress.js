@@ -22,9 +22,14 @@ exports.updateCourseProgress = async(req,res) => {
             userId:userId,
         });
         if(!courseProgress){
-            return res.status(404).json({
-                success:false,
-                message:"Course Progress does not exist",
+            // If progress document doesn't exist, create it
+            courseProgress = await CourseProgress.create({
+                courseID: courseId,
+                userId: userId,
+                completedVideos: [subSectionId],
+            });
+            await User.findByIdAndUpdate(userId, {
+                $push: { courseProgress: courseProgress._id }
             });
         }
         else{
@@ -37,9 +42,8 @@ exports.updateCourseProgress = async(req,res) => {
 
             // push into completed video
             courseProgress.completedVideos.push(subSectionId);
-
+            await courseProgress.save();
         }
-        await courseProgress.save();
 
         return res.status(200).json({
             success:true,
