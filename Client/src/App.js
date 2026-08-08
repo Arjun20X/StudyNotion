@@ -22,6 +22,7 @@ const Dashboard = lazy(() => import("./pages/Dashboard"));
 const Error = lazy(() => import("./pages/Error"));
 const Settings = lazy(() => import("./components/core/Dashboard/Settings"));
 const EnrolledCourses = lazy(() => import("./components/core/Dashboard/EnrolledCourses"));
+const PurchaseHistory = lazy(() => import("./components/core/Dashboard/PurchaseHistory"));
 const Cart = lazy(() => import("./components/core/Dashboard/Cart"));
 const AddCourse = lazy(() => import("./components/core/Dashboard/AddCourse"));
 const MyCourses = lazy(() => import("./components/core/Dashboard/MyCourses"));
@@ -73,6 +74,7 @@ function App() {
                             <>
                                 <Route path="dashboard/cart" element={<Cart/>} />
                                 <Route path="dashboard/enrolled-courses" element={<EnrolledCourses/>} />
+                                <Route path="dashboard/purchase-history" element={<PurchaseHistory/>} />
                             </>
                         )
                     }
