@@ -138,15 +138,20 @@ const CourseInformationForm = () => {
         formData.append("status", COURSE_STATUS.DRAFT);
         formData.append("thumbnailImage", data.courseImage)
 
+        // DEBUG: Log all FormData entries to see what's being sent
+        console.log("=== DEBUG: FormData entries ===");
+        for (let [key, value] of formData.entries()) {
+            console.log(`  ${key}:`, value);
+        }
+        console.log("=== END DEBUG ===");
+
         setLoading(true);
-        console.log("Before add course API call: ", formData);
         const result = await addCourseDetails(formData, token);
         if(result){
             dispatch(setStep(2));
             dispatch(setCourse(result));
         }
         setLoading(false);
-        console.log("Printing FormData: ", formData);
         console.log("Printing Result: ",result);
 
     }
@@ -228,8 +233,6 @@ const CourseInformationForm = () => {
                         </option>
                     ))
                 }
-
-                <option value="webdev" >Web dev</option>
 
             </select>
             {errors.courseCategory && (
