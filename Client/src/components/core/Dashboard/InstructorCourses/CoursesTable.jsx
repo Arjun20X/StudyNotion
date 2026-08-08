@@ -21,13 +21,13 @@ export default function CoursesTable({courses, setCourses}){
     const [loading, setLoading] = useState(false);
     const [confirmationModal, setConfirmationModal] = useState(null);
 
-    const handleCourseDelete = async ({courseId}) => {
+    const handleCourseDelete = async (courseId) => {
         setLoading(true);
 
         await deleteCourse({courseId:courseId}, token);
         const result = await fetchInstructorCourses(token);
         if(result){
-            setCourse(result);
+            setCourses(result);
         }
         setConfirmationModal(null);
         setLoading(false);
