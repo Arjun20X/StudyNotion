@@ -15,7 +15,7 @@ const PublishCourse = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const {token} = useSelector((state) => state.auth);
-    const {loading,setLoading} = useState(false);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         if(course?.status === COURSE_STATUS.PUBLISHED){
