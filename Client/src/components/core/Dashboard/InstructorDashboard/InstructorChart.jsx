@@ -22,11 +22,11 @@ const InstructorChart = ({courses}) => {
     // create data for chart displaying student info
 
     const chartDataForStudents = {
-        labels: courses?.map((course) => course.courseName),
+        labels: courses?.map((course) => course.courseName) || [],
         datasets: [
             {
-                data: courses.map((course) => course.totalStudentsEnrolled),
-                backgroundColor: getRandomColors(courses.length),
+                data: courses?.map((course) => course.totalStudentsEnrolled) || [],
+                backgroundColor: getRandomColors(courses?.length || 0),
             }
         ]
     }
@@ -34,11 +34,11 @@ const InstructorChart = ({courses}) => {
 
     // create data for chart displaying income info
     const chartDataForIncome = {
-        labels:courses.map((course) => course.courseName),
+        labels: courses?.map((course) => course.courseName) || [],
         datasets:[
             {
-                data:courses.map((course) => course.totalAmountGenerated),
-                backgroundColor: getRandomColors(courses.length),
+                data: courses?.map((course) => course.totalAmountGenerated) || [],
+                backgroundColor: getRandomColors(courses?.length || 0),
             }
         ]
     }

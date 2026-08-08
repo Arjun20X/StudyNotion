@@ -23,7 +23,7 @@ const Instructor = () => {
             console.log(instructorApiData);
             console.log("RESULT..",result);
 
-            if(instructorApiData.length){
+            if(instructorApiData?.length){
                 setInstructorData(instructorApiData);
             }
             if(result){
@@ -46,7 +46,7 @@ const Instructor = () => {
       </div>
 
        {loading ? (<div className='h-[calc(100vh-10rem)] grid place-items-center' ><Spinner /></div>)
-        : courses.length > 0
+        : courses?.length > 0
         ? (<div>
             <div className='flex flex-col md:flex-row gap-5 my-10'>
               <div className='w-full' >
@@ -56,7 +56,7 @@ const Instructor = () => {
                     <p>Statistics</p>
                     <div>
                       <p>Total Courses</p>
-                      <p>{courses.length}</p>
+                      <p>{courses?.length || 0}</p>
                     </div>
 
                     <div>
@@ -84,7 +84,7 @@ const Instructor = () => {
 
           <div>
             {
-              courses.slice(0,3).map((course) => (
+              courses?.slice(0,3).map((course) => (
                 <div key={course._id}>
                   <img 
                     src={course.thumbnail}
@@ -93,7 +93,7 @@ const Instructor = () => {
                   <div>
                     <p>{course.courseName}</p>
                     <div>
-                      <p>Students {course.studentsEnrolled.length}</p>
+                      <p>Students {course.studentsEnrolled?.length || 0}</p>
                       <p>|</p>
                       <p>Rs {course.price}</p>
                     </div>
@@ -109,7 +109,7 @@ const Instructor = () => {
         )   
         :(<div className='text-center mt-20 bg-richblack-800 px-6  py-20 rounded-md'>
           <p className='text-2xl font-bold text-richblack-5'>You Have not created any course yet</p>
-          <Link to="/dashboard/addCourse" >
+          <Link to="/dashboard/add-course" >
             <p className='mt-3  text-lg font-semibold text-yellow-50 underline' >Create a Course</p>
           </Link>
         </div>)
