@@ -4,6 +4,8 @@ dns.setServers(["8.8.8.8", "8.8.4.4"]);
 
 const express = require("express");
 const app = express();
+const rateLimit = require('express-rate-limit');
+
 
 const userRoutes = require("./routes/User");
 const profileRoutes = require("./routes/Profile");
@@ -25,29 +27,34 @@ const PORT = process.env.PORT || 4000;
 // database connect
 database.connect();
 
+
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // Time window: 15 minutes
+  limit: 100, // Limit each IP to 100 requests per window
+  message: 'Too many requests from this IP, please try again later.',
+  statusCode: 429, // Standard HTTP status for rate limiting
+  standardHeaders: 'draft-7', // Return standard rate limit info headers
+  legacyHeaders: false, // Disable X-RateLimit-* headers
+});
+
 // middlewares
+app.use(apiLimiter);
 app.use(express.json());
 app.use(cookieParser());
 
-
-
 const allowedOrigins = [
-  "https://study-notion-git-main-arjuns-projects-c804732d.vercel.app",
-  "http://localhost:3000",
-  "https://study-notion-blue-mu.vercel.app",
-  "https://study-notion-arjuns-projects-c804732d.vercel.app",
-  "https://study-notion-95z9bcuc2-arjuns-projects-c804732d.vercel.app",
-  "https://study-notion-3oluh4wy1-arjuns-projects-c804732d.vercel.app", 
+  "https://study-notion-six-amber.vercel.app/",
+  "http://34.207.205.76/"
 ];
   
 
 // const corsOptions = {
-//   origin: 'https://study-notion-six-amber.vercel.app/',
+//   origin: allowedOrigins,
 //   allowedHeaders: 'Content-Type,Authorization'
 // };
 
 app.use(
-  cors()
+  cors({ origin: allowedOrigins, credentials: true })
 );
   
 

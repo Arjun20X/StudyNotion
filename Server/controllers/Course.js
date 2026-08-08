@@ -27,15 +27,19 @@ exports.createCourse = async (req, res) =>{
       instructions: _instructions,
     } = req.body
 
-    // Get thumbnail image from request files
-    const thumbnail = req.files.thumbnailImage
+    // Get thumbnail image from request files (defensive check)
+    const thumbnail = req.files?.thumbnailImage;
+
+    if (!thumbnail) {
+      return res.status(400).json({
+        success: false,
+        message: "Thumbnail image is required",
+      });
+    }
 
     // Convert the tag and instructions from stringified Array to Array
     const tag = JSON.parse(_tag);
     const instructions = JSON.parse(_instructions);
-
-    console.log("tag", tag)
-    console.log("instructions", instructions)
 
     // Check if any of the required fields are missing
     if (
@@ -44,7 +48,6 @@ exports.createCourse = async (req, res) =>{
       !whatYouWillLearn ||
       !price ||
       !tag.length ||
-      !thumbnail ||
       !category ||
       !instructions.length
     ) {
@@ -56,15 +59,11 @@ exports.createCourse = async (req, res) =>{
 
     const status = _status || "Draft"
 
-
     // Get user ID from request object
     const userId = req.user.id;
 
-     // Check if the user is an instructor
-    const instructorDetails = await User.findById(userId,{
-      accountType:"Instructor",
-    }); 
-    console.log("Instructor Details: ", instructorDetails);
+    // Find the instructor user by ID
+    const instructorDetails = await User.findById(userId);
 
     if (!instructorDetails) {
       return res.status(404).json({
@@ -87,7 +86,6 @@ exports.createCourse = async (req, res) =>{
       thumbnail,
       process.env.FOLDER_NAME
     );
-    console.log(thumbnailImage);
 
     // Create an entry for new course with the given details
     const newCourse = await Course.create({
@@ -117,7 +115,7 @@ exports.createCourse = async (req, res) =>{
     );
 
     // Add the new course to the Categories
-    const categoryDetails2 = await Category.findByIdAndUpdate(
+    await Category.findByIdAndUpdate(
       { _id: category },
       {
         $push: {
@@ -126,7 +124,6 @@ exports.createCourse = async (req, res) =>{
       },
       { new: true }
     );
-    console.log("HEREEEEEEEE", categoryDetails2)
 
     // Return the new course and a success message
     res.status(200).json({
@@ -138,7 +135,7 @@ exports.createCourse = async (req, res) =>{
   catch (error) {
 
     // Handle any errors that occur during the creation of the course
-    console.error(error)
+    console.error("CREATE COURSE ERROR:", error.message, error.stack)
     return res.status(500).json({
       success: false,
       message: "Failed to create course",

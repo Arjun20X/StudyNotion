@@ -149,11 +149,11 @@ const enrollStudents = async(courses, userId, res) => {
     });
   }
 
-  for(const courseId of courses) {
+  for(const courseID of courses) {
     try{
       // find the course and enroll the students in it
       const enrolledCourse = await Course.findOneAndUpdate(
-        {_id:courseId},
+        {_id:courseID},
         {$push:{studentsEnrolled:userId}},
         {new:true},
       )
@@ -166,7 +166,7 @@ const enrollStudents = async(courses, userId, res) => {
       }
 
       const courseProgress = await CourseProgress.create({
-        courseId:courseId,
+        courseId:courseID,
         userId:userId,
         completedVideos:[],
       })
@@ -174,7 +174,7 @@ const enrollStudents = async(courses, userId, res) => {
       // find the students and ada the course to their list of enrolled Courses
       const enrolledStudent = await User.findByIdAndUpdate(userId,
         {$push:{
-          courses: courseId,
+          courses: courseID,
           courseProgress:courseProgress._id,
         }},
         {new:true},
