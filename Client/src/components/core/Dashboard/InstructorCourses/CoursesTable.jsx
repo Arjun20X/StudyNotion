@@ -4,7 +4,6 @@ import { convertSecondsToDuration } from "../../../../utils/secToDuration"
 import { COURSE_STATUS } from '../../../../utils/constants';
 import ConfirmationModal from '../../../Common/ConfirmationModal';
 import {deleteCourse, fetchInstructorCourses } from '../../../../Services/operations/courseDetailsAPI';
-import { setCourse } from '../../../../slice/courseSlice';
 import { Table, Tbody, Thead, Tr, Th, Td } from 'react-super-responsive-table';
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css'
 import { useNavigate } from 'react-router-dom';
