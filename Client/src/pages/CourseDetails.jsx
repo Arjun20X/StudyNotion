@@ -14,6 +14,10 @@ import RatingStars from '../components/Common/RatingStars';
 import {formatDate} from "../Services/formatDate"
 import CourseDetailsCard from '../components/core/Course/CourseDetailsCard';
 
+import { ACCOUNT_TYPE } from '../utils/constants';
+import { addToCart } from '../slice/cartSlice';
+import toast from 'react-hot-toast';
+
 const CourseDetails = () => {
 
     const {user} = useSelector((state) => state.profile);
@@ -76,6 +80,24 @@ const CourseDetails = () => {
         )
     }
 
+    const handleAddToCart = () => {
+        if (user && user?.accountType === ACCOUNT_TYPE.INSTRUCTOR) {
+            toast.error("You are an Instructor, you can't buy a course");
+            return;
+        }
+        if (token) {
+            dispatch(addToCart(courseData?.data?.courseDetails));
+            return;
+        }
+        setConfirmationModal({
+            text1: "You are not logged in",
+            text2: "Please login to add to cart",
+            btn1Text: "Login",
+            btn2Text: "Cancel",
+            btn1Handler: () => navigate("/login"),
+            btn2Handler: () => setConfirmationModal(null),
+        });
+    };
 
     // to update 
     const handleBuyCourse = () => {
@@ -196,7 +218,7 @@ const CourseDetails = () => {
               <button className="yellowButton uppercase tracking-wider" onClick={handleBuyCourse}>
                 Buy Now
               </button>
-              <button className="blackButton uppercase tracking-wider">Add to Cart</button>
+              <button className="blackButton uppercase tracking-wider" onClick={handleAddToCart}>Add to Cart</button>
             </div>
           </div>
           {/* Courses Card */}
