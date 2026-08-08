@@ -86,7 +86,7 @@ export default function ChangeProfilePicture() {
               </button>
               <IconBtn
                 text={loading ? "Uploading..." : "Upload"}
-                onclick={handleFileUpload}
+                onClick={handleFileUpload}
                 disabled={loading}
                 customClasses='lg:py-2 lg:px-5'
               >

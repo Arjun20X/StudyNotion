@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Iconbtn from '../../Common/Iconbtn';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md'
+import { markLectureAsComplete } from '../../../Services/operations/courseDetailsAPI';
+import { updateCompletedLectures } from '../../../slice/viewCourseSlice';
 
 const VideoDetailsSidebar = ({setReviewModal}) => {
 
     const [activeStatus, setActiveStatus] = useState("");
     const [videobarActive, setVideoBarActive] = useState("");
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const location = useLocation();
     const {sectionId, subSectionId} = useParams();
+    const {token} = useSelector((state) => state.auth);
     const{
         courseSectionData,
         courseEntireData,
@@ -47,6 +51,16 @@ const VideoDetailsSidebar = ({setReviewModal}) => {
         setReviewModal(true);
     }
 
+    const handleToggleComplete = async (e, topicId) => {
+        e.stopPropagation();
+        if (!completedLectures?.includes(topicId)) {
+            const res = await markLectureAsComplete({ courseId: courseEntireData?._id, subSectionId: topicId }, token);
+            if (res) {
+                dispatch(updateCompletedLectures(topicId));
+            }
+        }
+    };
+
   return (
     <>
         <div className='text-white' >
@@ -64,7 +78,7 @@ const VideoDetailsSidebar = ({setReviewModal}) => {
 
                     <Iconbtn 
                         text="Add Review"
-                        onclick={() => handleAddReview()}
+                        onClick={() => handleAddReview()}
                     />
                     
                    
@@ -120,7 +134,7 @@ const VideoDetailsSidebar = ({setReviewModal}) => {
                                                         <input 
                                                             type='checkbox'
                                                             checked = {completedLectures?.includes(topic?._id)}
-                                                            onChange={() => {}}
+                                                            onChange={(e) => handleToggleComplete(e, topic?._id)}
                                                         />
                                                         <span>
                                                             {topic.title}
