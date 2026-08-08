@@ -106,7 +106,7 @@ export const addCourseDetails = async (data, token) => {
     console.log("printing yoyo result",result);
   } catch (error) {
     console.log("CREATE COURSE API ERROR............", error);
-    toast.error(error.response.data.message);
+    toast.error(error?.response?.data?.message || error.message || "Failed to add course");
   }
   toast.dismiss(toastId);
   return result;
@@ -129,7 +129,7 @@ export const editCourseDetails = async (data, token) => {
     result = response?.data?.data;
   } catch (error) {
     console.log("EDIT COURSE API ERROR............", error);
-    toast.error(error.response.data.message);
+    toast.error(error?.response?.data?.message || error.message || "Failed to update course");
   }
   toast.dismiss(toastId);
   return result;
@@ -310,7 +310,7 @@ export const deleteCourse = async (data, token) => {
     toast.success("Course Deleted");
   } catch (error) {
     console.log("DELETE COURSE API ERROR............", error);
-    toast.error(error.response.data.message);
+    toast.error(error?.response?.data?.message || error.message || "Failed to delete course");
   }
   toast.dismiss(toastId);
 };
@@ -392,7 +392,7 @@ export const createRating = async (data, token) => {
   } catch (error) {
     success = false;
     console.log("CREATE RATING API ERROR............", error);
-    toast.error(error.response.data.message);
+    toast.error(error?.response?.data?.message || error.message || "Failed to create rating");
   }
   toast.dismiss(toastId);
   return success;
