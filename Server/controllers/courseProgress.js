@@ -33,15 +33,15 @@ exports.updateCourseProgress = async(req,res) => {
             });
         }
         else{
-            // check for re-completing video/subSection
+            // check for re-completing video/subSection (toggle logic)
             if(courseProgress.completedVideos.includes(subSectionId)){
-                return res.status(400).json({
-                    error:"SubSection already completed",
-                });
+                courseProgress.completedVideos = courseProgress.completedVideos.filter(
+                    (id) => id.toString() !== subSectionId.toString()
+                );
+            } else {
+                // push into completed video
+                courseProgress.completedVideos.push(subSectionId);
             }
-
-            // push into completed video
-            courseProgress.completedVideos.push(subSectionId);
             await courseProgress.save();
         }
 

@@ -53,11 +53,9 @@ const VideoDetailsSidebar = ({setReviewModal}) => {
 
     const handleToggleComplete = async (e, topicId) => {
         e.stopPropagation();
-        if (!completedLectures?.includes(topicId)) {
-            const res = await markLectureAsComplete({ courseId: courseEntireData?._id, subSectionId: topicId }, token);
-            if (res) {
-                dispatch(updateCompletedLectures(topicId));
-            }
+        const res = await markLectureAsComplete({ courseId: courseEntireData?._id, subSectionId: topicId }, token);
+        if (res) {
+            dispatch(updateCompletedLectures(topicId));
         }
     };
 
@@ -132,10 +130,11 @@ const VideoDetailsSidebar = ({setReviewModal}) => {
                                                     }}
                                                     >
                                                         <input 
-                                                            type='checkbox'
-                                                            checked = {completedLectures?.includes(topic?._id)}
-                                                            onChange={(e) => handleToggleComplete(e, topic?._id)}
-                                                        />
+                                                             type='checkbox'
+                                                             checked = {completedLectures?.includes(topic?._id)}
+                                                             onChange={(e) => handleToggleComplete(e, topic?._id)}
+                                                             onClick={(e) => e.stopPropagation()}
+                                                         />
                                                         <span>
                                                             {topic.title}
                                                         </span>
