@@ -216,7 +216,7 @@ const CourseInformationForm = () => {
             <select
             id='courseCategory'
             defaultValue=""
-            {...register("CourseCategory", {required:true})}
+            {...register("courseCategory", {required:true})}
             className="form-style w-full uppercase tracking-wider"
             >
                 <option value="" disabled >Choose a Category</option>
