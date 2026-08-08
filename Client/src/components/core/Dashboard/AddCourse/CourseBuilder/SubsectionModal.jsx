@@ -55,7 +55,7 @@ const SubsectionModal = ({
         const currentValues = getValues();
         const formData = new FormData();
 
-        formData.append("sectionId", modalData.sectionID);
+        formData.append("sectionId", modalData.sectionId);
         formData.append("subSectionId", modalData._id);
         
         if(currentValues.lectureTitle !== modalData.title){
@@ -75,7 +75,7 @@ const SubsectionModal = ({
         // API call
         const result = await updateSubSection(formData,token);
         if(result){
-            const updatedCourseContent = course.courseContent.map((section) => 
+            const updatedCourseContent = course?.courseContent?.map((section) => 
             section._id === modalData.sectionId ? result : section);
     
             const updatedCourse = {...course, courseContent:updatedCourseContent};
@@ -92,12 +92,12 @@ const SubsectionModal = ({
             return;
         }
         if(edit){
-            if(!isFormUpdated){
-                toast.error("No  changes made to the form")
+            if(!isFormUpdated()){
+                toast.error("No changes made to the form")
             }
             else{
                 // edit krdo store me
-                handleEditSubsection();
+                await handleEditSubsection();
             }
             return;
         }
@@ -114,7 +114,7 @@ const SubsectionModal = ({
 
         if(result) {
 
-            const updatedCourseContent = course.courseContent.map((section) => 
+            const updatedCourseContent = course?.courseContent?.map((section) => 
             section._id === modalData ? result : section);
     
             const updatedCourse = {...course, courseContent:updatedCourseContent};
@@ -143,7 +143,7 @@ const SubsectionModal = ({
             {/* Lecture Video Uplaod */}
             <Upload 
                 name='lectureVideo'
-                lable="Lecture Video"
+                label="Lecture Video"
                 register={register}
                 setValue={setValue}
                 errors={errors}
