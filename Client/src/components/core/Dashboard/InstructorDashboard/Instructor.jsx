@@ -5,7 +5,8 @@ import { fetchInstructorCourses } from '../../../../Services/operations/courseDe
 import { Link } from 'react-router-dom';
 import InstructorChart from './InstructorChart';
 import Spinner from "../../../Common/Spinner"
-import { VscBook, VscPeople } from 'react-icons/vsc'
+import { VscBook } from 'react-icons/vsc'
+import { FiUsers } from 'react-icons/fi'
 import { HiOutlineCurrencyRupee } from 'react-icons/hi'
 
 const Instructor = () => {
@@ -82,7 +83,7 @@ const Instructor = () => {
                                 {/* Total Students */}
                                 <div className="flex items-center gap-4 rounded-xl border border-richblack-700 bg-richblack-900/60 p-4 transition-all hover:bg-richblack-900">
                                     <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-caribbeangreen-500/10 text-caribbeangreen-200">
-                                        <VscPeople size={24} />
+                                        <FiUsers size={24} />
                                     </div>
                                     <div>
                                         <p className="text-xs font-semibold text-richblack-300 uppercase tracking-wider">Total Students</p>
